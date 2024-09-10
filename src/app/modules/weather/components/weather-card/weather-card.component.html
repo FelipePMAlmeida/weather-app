@@ -1,0 +1,52 @@
+<div class="container" *ngIf="weatherDataInput"
+  [ngClass]="{
+    'warm-background': weatherDataInput.main.temp > 15,
+    'cold-background': weatherDataInput.main.temp <= 15,
+    'rainy-background' : weatherDataInput.weather[0].main === 'Rain' || weatherDataInput.weather[0].main === 'Drizzle'
+  }">
+  <!-- Temperature images -->
+  <div class="upper-data">
+    <img src="../../../../../assets/sunny.jpg" *ngIf="weatherDataInput.main.temp > 15"/>
+    <img src="../../../../../assets/cold.jpg" *ngIf="weatherDataInput.main.temp <= 15"/>
+    <img src="../../../../../assets/rainy.jpg" *ngIf="weatherDataInput.weather[0].main === 'Rain' || weatherDataInput.weather[0].main === 'Drizzle'"/>
+    <img src="../../../../../assets/freezing.jpg" *ngIf="weatherDataInput.main.temp <= 0"/>
+    <div class="weather-data">
+      <div class="location">{{ weatherDataInput.name }}</div>
+      <div class="temperature">{{ weatherDataInput.main.temp | number : "1.0-0" }} °C</div>
+    </div>
+  </div>
+  <!-- More info -->
+  <div class="lower-data">
+    <div class="more-info-label">More Info</div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="minTemperatureIcon"></fa-icon>
+          <span>Min. Temp.</span>
+        </div>
+        <div class="info-block-value">{{ weatherDataInput.main.temp_min | number : "1.0-0" }} °C</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="maxTemperatureIcon"></fa-icon>
+          <span>Max. Temp.</span>
+        </div>
+        <div class="info-block-value">{{ weatherDataInput.main.temp_max | number : "1.0-0" }} °C</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="humidityIcon"></fa-icon>
+          <span>Humidity</span>
+        </div>
+        <div class="info-block-value">{{ weatherDataInput.main.humidity }}%</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon size="lg" [icon]="windIcon"></fa-icon>
+          <span>Wind</span>
+        </div>
+        <div class="info-block-value">{{ weatherDataInput.wind.speed }} km/h</div>
+      </div>
+    </div>
+  </div>
+</div>
